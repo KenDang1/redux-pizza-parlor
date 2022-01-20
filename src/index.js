@@ -13,7 +13,6 @@ const pizzaReducer = (state = [], action) => {
     switch(action.type) {
         case 'SET_PIZZA':
             return action.payload;
-
         case 'PIZZA_TO_ORDER':
             return[...state, action.payload];
     }
