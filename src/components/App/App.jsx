@@ -1,8 +1,14 @@
 import React, {useEffect} from 'react';
+import {useDispatch} from 'react-redux';
 import axios from 'axios';
 import './App.css';
 
+import PizzaList from '../PizzaList/PizzaList';
+
 function App() {
+
+  // setup dispatch
+  const dispatch = useDispatch();
 
   // setup useEffect to call fetchPizza function
   useEffect(() => {
@@ -18,12 +24,16 @@ function App() {
         // tell client of success
         console.log('pizza from database:', res.data);
 
-        // set 
+        // send data to pizzaReducer
+        dispatch({
+          type: 'SET_PIZZA',
+          payload: res.data
+        });
       })
       .catch((err) => {
         // tell client of failure
         console.error('axios GET ERROR!', err);
-      })
+      });
   }
 
   return (
@@ -34,6 +44,7 @@ function App() {
   
       <img src='images/pizza_photo.png' />
       <p>Pizza is great.</p>
+      <PizzaList />
   
     </div>
   );
