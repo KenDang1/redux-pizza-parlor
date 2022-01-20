@@ -2,16 +2,27 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 
 function PizzaListItem ({pizza}) {
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
-    // const addPizzaToOrder = () => {
-
-    // };
+    const addPizzaToOrder = () => {
+        dispatch({
+            type: 'PIZZA_TO_ORDER',
+            payload: pizza 
+        })
+    };
 
     return (
-        <li>
-            {pizza.name} {pizza.image_path} {pizza.price}
-        </li>
+        <ul>
+            {pizza.name}
+            <br />
+            <img src={pizza.image_path} height="50px"  width="50px"/>
+            <br />
+            {pizza.description}
+            <br />
+            {pizza.price}
+            <br />
+            <button onClick={addPizzaToOrder}> Add to Order </button>
+        </ul>
         
     )
 
