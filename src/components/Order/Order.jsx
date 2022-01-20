@@ -9,6 +9,7 @@ function Order () {
     const order = useSelector(store => store.orderReducer)
     const history = useHistory();
 
+
     // TODO: Clear the order and navigate back to pizza page
     const handleOrder = () =>{
         dispatch({
@@ -17,20 +18,30 @@ function Order () {
         history.push('/')
     }
 
+    const onHandleNext = () => {
+        {/** TODO: when click on the button it take to the next page so client can inputs their info */}
+    }
 
-
-    // Checkout button clicked to clear the list
+    // Next button clicked to clear the list
+    const onDelete = (pizza) => {
+        dispatch({
+            type: 'DELETE_PIZZA',
+            payload: pizza
+        })
+    }
 
     return (
         <>
         <h2>Order</h2>
-        {/** TODO: Display pizza client want to order */}
-        {order.map((pizza, i) =>(
-            <li key={i}>{pizza.name}: {pizza.description}: {pizza.price}</li>
-        ))}
-
+        <div>
+        <h2>Checkout</h2>
+        {order.map((pizza, i) => 
+         <li key={i}>{pizza.name}: {pizza.description}: {pizza.price}
+          <button onClick={event => onDelete(pizza)}>DELETE</button>
+        </li>
+        )}
         <button onClick={handleOrder}>Order</button>
-
+        </div>
         <CheckoutTotal />
         </>
 
