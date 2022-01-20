@@ -1,10 +1,15 @@
 import React, {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
+import {HashRouter as Router, Route, Link} from 'react-router-dom';
 import axios from 'axios';
 import './App.css';
 
 import PizzaList from '../PizzaList/PizzaList';
+
 import PizzaForm from '../PizzaForm/PizzaForm';
+
+import Order from '../Order/Order.jsx'
+
 
 function App() {
 
@@ -38,18 +43,31 @@ function App() {
   }
 
   return (
+    <Router>
     <div className='App'>
       <header className='App-header'>
         <h1 className='App-title'>Prime Pizza</h1>
       </header>
-  
+    <Link to="/">Home</Link>
+    <Link to="/pizzaList">PizzaList</Link>
+    <Link to="/order">Order</Link>
+    <br />
       <img src='images/pizza_photo.png' />
       <p>Pizza is great.</p>
-      
+
       <PizzaForm fetchPizza={fetchPizza} />
+
+
+      <Route path="/pizzaList" exact>
+
       <PizzaList />
-  
+      </Route>
+
+      <Route path="/order" exact>
+      <Order />
+      </Route>
     </div>
+    </Router>
   );
 }
 
