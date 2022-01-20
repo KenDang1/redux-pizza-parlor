@@ -6,9 +6,9 @@ const PizzaList = () => {
 
     return(
         <div>
-            {pizzaList.map((pizza, i) => {
+            {pizzaList.map((pizza, i) => (
                 <div key={i}>{pizza.name}</div>
-            })}
+            ))}
         </div>
     )
 }
