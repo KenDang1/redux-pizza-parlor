@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
+import {HashRouter as Router, Route, Link} from 'react-router-dom';
 import axios from 'axios';
 import './App.css';
 
@@ -41,11 +42,11 @@ function App() {
       <header className='App-header'>
         <h1 className='App-title'>Prime Pizza</h1>
       </header>
-  
+      <Router>
       <img src='images/pizza_photo.png' />
       <p>Pizza is great.</p>
       <PizzaList />
-  
+      </Router>
     </div>
   );
 }
