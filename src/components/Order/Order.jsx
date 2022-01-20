@@ -2,6 +2,8 @@ import react from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
+import CheckoutTotal from '../CheckoutTotal/CheckoutTotal';
+
 function Order () {
     const dispatch = useDispatch();
     const order = useSelector(store => store.orderReducer)
@@ -29,7 +31,7 @@ function Order () {
 
         <button onClick={handleOrder}>Order</button>
 
-        
+        <CheckoutTotal />
         </>
 
     )
