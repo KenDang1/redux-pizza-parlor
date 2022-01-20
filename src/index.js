@@ -10,7 +10,10 @@ import logger from 'redux-logger';
 
 // pizzaReducer "NOT DONE"
 const pizzaReducer = (state = [], action) => {
-
+    switch(action.type) {
+        case 'SET_PIZZA':
+            return [...state, action.payload]
+    }
     return state;
 }; // end of pizza reducer
 
