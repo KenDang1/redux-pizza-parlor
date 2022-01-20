@@ -8,6 +8,12 @@ function Order () {
     const history = useHistory();
 
     // TODO: Clear the order and navigate back to pizza page
+    const handleOrder = () =>{
+        dispatch({
+            type: 'CLEAR_ORDER'
+        })
+        history.push('/')
+    }
 
 
 
@@ -15,7 +21,14 @@ function Order () {
 
     return (
         <>
+        <h2>Order</h2>
         {/** TODO: Display pizza client want to order */}
+        {order.map((pizza, i) =>(
+            <li key={i}>{pizza.name}: {pizza.description}: {pizza.price}</li>
+        ))}
+
+        <button onClick={handleOrder}>Order</button>
+
         
         </>
 
