@@ -5,11 +5,14 @@ const CheckoutTotal = () => {
     //gain access to global variable
     const checkoutTotal = useSelector(store => store.orderReducer);
 
+
     const sum = (checkoutTotal) => {
         let sum = 0;
-        for (let i = 0; i < checkoutTotal.length-1; i ++) {
+        for (let i = 0; i < checkoutTotal.length; i ++) {
             let pizza = checkoutTotal[i];
-            sum += pizza.price;
+            sum += Number(pizza.price);
+            console.log(pizza.price);
+            console.log(sum);
         }
         return sum;
     }
