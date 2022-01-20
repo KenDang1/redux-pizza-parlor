@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
+import {HashRouter as Router, Route, Link} from 'react-router-dom';
 import axios from 'axios';
 import './App.css';
-import { HashRouter as Router, Route, Link } from 'react-router-dom';
 
 import PizzaList from '../PizzaList/PizzaList';
 import Order from '../Order/Order.jsx'
@@ -47,6 +47,7 @@ function App() {
     <Link to="/">Home</Link>
     <Link to="/pizzaList">PizzaList</Link>
     <Link to="/order">Order</Link>
+    <br />
       <img src='images/pizza_photo.png' />
       <p>Pizza is great.</p>
 
