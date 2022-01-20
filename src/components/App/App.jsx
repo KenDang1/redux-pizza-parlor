@@ -4,6 +4,7 @@ import axios from 'axios';
 import './App.css';
 
 import PizzaList from '../PizzaList/PizzaList';
+import PizzaForm from '../PizzaForm/PizzaForm';
 
 function App() {
 
@@ -44,6 +45,8 @@ function App() {
   
       <img src='images/pizza_photo.png' />
       <p>Pizza is great.</p>
+      
+      <PizzaForm fetchPizza={fetchPizza} />
       <PizzaList />
   
     </div>
