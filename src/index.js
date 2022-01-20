@@ -12,10 +12,12 @@ import logger from 'redux-logger';
 const pizzaReducer = (state = [], action) => {
     switch(action.type) {
         case 'SET_PIZZA':
-            return [...state, action.payload]
+            return action.payload;
+        case 'PIZZA_TO_ORDER':
+            return[...state, action.payload];
     }
     return state;
-}; // end of pizza reducer
+};  // end of pizza reducer
 
 // orderReducer "NOT DONE"
 const orderReducer = (state = [], action) => {
