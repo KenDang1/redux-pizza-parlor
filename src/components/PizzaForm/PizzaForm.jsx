@@ -1,18 +1,38 @@
 import {useState} from 'react';
 import axios from 'axios';
+import { useSelector } from "react-redux";
 
 function PizzaForm({ fetchPizza }) {
-  const [customer_name, setName] = useState('');
-  const [street_address, setStreetAddress] = useState('');
+  const [name, setName] = useState('');
+  const [address, setAddress] = useState('');
   const [city, setCity] = useState('');
   const [zip, setZip] = useState('');
-  const [type, setType] = useState('');
+  const [type, setType] = useState('Pickup');
+
+  const checkoutTotal = useSelector(store => store.orderReducer);
+  console.log('checkoutTotal is', checkoutTotal);
+
+    const order = (checkoutTotal) => {
+        let sum = 0;
+        for (let i = 0; i < checkoutTotal.length-1; i ++) {
+            let pizza = checkoutTotal[i];
+            sum += pizza.price;
+        }
+        return sum;
+    }
+
+    let total = order(checkoutTotal);
 
   const handleSubmit = event => {
     event.preventDefault();
 
+    const customer = {
+        customer_name: name, street_address: address, city, zip, type, total
+    }
+    console.log('customer is', customer);
     // TODO - axios request to server to add customer details
-    axios.post('/api/order', { customer_name, street_address, city, zip, type })
+    axios.post('/api/order', customer)
+
       .then(res => {
         console.log('POST /api/order', res.data);
         fetchPizza();
@@ -30,15 +50,15 @@ function PizzaForm({ fetchPizza }) {
           required 
           type="text"
           placeholder="Name" 
-          value={customer_name}
+          value={name}
           onChange={(event) => setName(event.target.value)}
         />
         <br />
         <input 
           required 
           placeholder="Street Address" 
-          value={street_address}
-          onChange={(event) => setStreetAddress(event.target.value)}
+          value={address}
+          onChange={(event) => setAddress(event.target.value)}
         />
         <br />
         <input 
