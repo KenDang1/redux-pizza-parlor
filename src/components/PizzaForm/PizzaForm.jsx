@@ -12,19 +12,20 @@ function PizzaForm({ fetchPizza }) {
   const checkoutTotal = useSelector(store => store.orderReducer);
   console.log('checkoutTotal is', checkoutTotal);
 
-    const order = (checkoutTotal) => {
-        let sum = 0;
-        for (let i = 0; i < checkoutTotal.length-1; i ++) {
-            let pizza = checkoutTotal[i];
-            sum += pizza.price;
-        }
-        return sum;
-    }
-
-    let total = order(checkoutTotal);
 
   const handleSubmit = event => {
     event.preventDefault();
+
+    const order = (checkoutTotal) => {
+      let sum = 0;
+      for (let i = 0; i < checkoutTotal.length; i ++) {
+          let pizza = checkoutTotal[i];
+          sum += Number(pizza.price);
+      }
+      return sum;
+    }
+
+    let total = order(checkoutTotal);
 
     const customer = {
         customer_name: name, street_address: address, city, zip, type, total
