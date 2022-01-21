@@ -9,26 +9,46 @@ function PizzaForm({ fetchPizza }) {
   const [zip, setZip] = useState('');
   const [type, setType] = useState('Pickup');
 
-  const checkoutTotal = useSelector(store => store.orderReducer);
-  console.log('checkoutTotal is', checkoutTotal);
+  const checkoutPizza = useSelector(store => store.PizzaReducer)
+  const checkoutOrder = useSelector(store => store.orderReducer);
+  console.log('checkoutOrder is', checkoutOrder);
 
 
   const handleSubmit = event => {
     event.preventDefault();
 
-    const order = (checkoutTotal) => {
+    const order = (checkoutOrder) => {
       let sum = 0;
-      for (let i = 0; i < checkoutTotal.length; i ++) {
-          let pizza = checkoutTotal[i];
+      for (let i = 0; i < checkoutOrder.length; i ++) {
+          let pizza = checkoutOrder[i];
           sum += Number(pizza.price);
-      }
+          }
       return sum;
     }
 
-    let total = order(checkoutTotal);
+    let total = order(checkoutOrder);
+
+    const customerQuantity = (checkoutOrder) => {
+      let quantity = 0;
+      for (let i = 0; i < checkoutOrder.length; i ++) {
+        if (i < checkoutOrder.length) {
+          quantity ++;
+          console.log(quantity);
+        }
+    }
+    return quantity;
+    }
+
+    let quantity = customerQuantity(checkoutOrder);
+
+    
+
+    const pizzas = {
+      quantity
+    }
 
     const customer = {
-        customer_name: name, street_address: address, city, zip, type, total
+        customer_name: name, street_address: address, city, zip, type, total, pizzas
     }
     console.log('customer is', customer);
     // TODO - axios request to server to add customer details
