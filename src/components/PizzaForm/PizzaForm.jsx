@@ -2,24 +2,23 @@ import {useState} from 'react';
 import axios from 'axios';
 
 function PizzaForm({ fetchPizza }) {
-  const [name, setName] = useState('');
-  const [streetAddress, setStreetAddress] = useState('');
+  const [customer_name, setName] = useState('');
+  const [street_address, setStreetAddress] = useState('');
   const [city, setCity] = useState('');
   const [zip, setZip] = useState('');
+  const [type, setType] = useState('');
 
   const handleSubmit = event => {
     event.preventDefault();
 
-    console.log(`Adding pizza`, {name, streetAddress, city, zip});
-
     // TODO - axios request to server to add customer details
-    axios.post('/pizza', { name, streetAddress, city, zip })
+    axios.post('/api/order', { customer_name, street_address, city, zip, type })
       .then(res => {
-        console.log('POST /pizza', res.data);
+        console.log('POST /api/order', res.data);
         fetchPizza();
       })
       .catch(err => {
-        console.error('POST /pizz failed', err);
+        console.error('POST /api/order failed', err);
       });
   };
 
@@ -31,14 +30,14 @@ function PizzaForm({ fetchPizza }) {
           required 
           type="text"
           placeholder="Name" 
-          value={name}
+          value={customer_name}
           onChange={(event) => setName(event.target.value)}
         />
         <br />
         <input 
           required 
           placeholder="Street Address" 
-          value={streetAddress}
+          value={street_address}
           onChange={(event) => setStreetAddress(event.target.value)}
         />
         <br />
@@ -56,6 +55,11 @@ function PizzaForm({ fetchPizza }) {
           onChange={(event) => setZip(event.target.value)}
         />
         <br />
+
+        <select value={type} onChange={(event) => setType(event.target.value)}>
+        <option value="pickup">Pickup</option>
+        <option value="delivery">Delivery</option>
+        </select> <br />
 
         <button type="submit">
           NEXT
